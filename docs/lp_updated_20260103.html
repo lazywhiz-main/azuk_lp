@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azuk - 不安をここに預けて、あなたが思う大事なことに集中する。</title>
+  <meta name="description" content="Azukは、がん告知後の情報の荷を下ろし、本来の自分を取り巻く「静寂」を確保するためのライフデザイン・ロジスティクスを提供します。">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Colors */
+      --color-primary: #1B222E; /* 鉄紺 */
+      --color-background: #FAF9F6; /* 生成り */
+      --color-surface: #FFFFFF; /* 白練 */
+      --color-accent: #C25E40; /* 土器色 */
+      --color-text-sub: #64748B; /* 鉛色 */
+      --color-border: #E2E8F0; /* 薄墨 */
+      
+      /* Typography */
+      --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Inter', sans-serif;
+      
+      /* Spacing */
+      --spacing-xl: 24px;
+      --spacing-xxl: 32px;
+      --spacing-section: 140px;
+      
+      --radius-button: 8px;
+      --radius-card: 16px;
+      --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-background);
+      color: var(--color-primary);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-xl);
+    }
+
+    /* 1. Hero: Gravity Area */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background-color: var(--color-primary);
+      color: #E2E8F0;
+      text-align: center;
+    }
+
+    .hero-content {
+      z-index: 10;
+      padding: var(--spacing-xl);
+      max-width: 900px;
+    }
+
+    .hero-message {
+      font-size: clamp(26px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: var(--spacing-xl);
+      letter-spacing: 0.08em;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 400;
+      color: #94A3B8;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .noise-item {
+      position: absolute;
+      font-size: 13px;
+      color: #94A3B8;
+      opacity: 0.15;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* 2. Intro Section: Pattern B Narrative */
+    .intro-section {
+      background-color: var(--color-surface);
+      padding: var(--spacing-section) 0;
+    }
+
+    .intro-text {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: var(--color-primary);
+    }
+
+    .intro-text p {
+      margin-bottom: 2.5em;
+    }
+
+    .intro-text .heavy-load {
+      font-weight: 700;
+      border-top: 1px solid var(--color-border);
+      padding-top: 2.5em;
+      margin-top: 1em;
+    }
+
+    /* 3. Logic Section: 3 Steps */
+    .logic-section {
+      background-color: var(--color-background);
+      padding: var(--spacing-section) 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .step-label {
+      font-weight: 700;
+      color: var(--color-accent);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .step-card h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .step-card p {
+      font-size: 15px;
+      color: var(--color-text-sub);
+    }
+
+    /* 4. Features: Functional Proof */
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      margin-bottom: 140px;
+      padding: var(--spacing-xl) 0;
+    }
+
+    .feature-item:last-child { margin-bottom: 0; }
+
+    .feature-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-info { flex: 1.2; }
+    .feature-visual {
+      flex: 1;
+      aspect-ratio: 1;
+      background-color: var(--color-surface);
+      border-radius: 50%; /* 柔らかい印象 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-sub);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* 5. Philosophy: Sanctuary */
+    .philosophy-section {
+      background-color: var(--color-primary);
+      color: var(--color-surface);
+      padding: 160px 0;
+      text-align: center;
+    }
+
+    /* CTA */
+    .cta-button {
+      display: inline-block;
+      padding: 20px 48px;
+      background-color: var(--color-accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: var(--radius-button);
+      margin-top: 60px;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-message { font-size: 26px; text-align: left; }
+      .hero-sub { text-align: left; }
+      .step-grid { grid-template-columns: 1fr; }
+      .feature-item { flex-direction: column !important; gap: 40px; }
+      .section { padding: 100px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Hero -->
+  <header id="hero">
+    <div id="noise-layer"></div>
+    <div class="hero-content">
+      <h1 class="hero-message">
+        不安をここに預けて、<br>
+        あなたが思う大事なことに集中する。
+      </h1>
+      <p class="hero-sub">
+        自分の「今日」が病気の情報に支配されてしまわないように。<br>
+        情報の荷を解き、本来の自分を取り巻く「静寂」を確保するための<br>
+        Life Design Logistics（ライフデザイン・ロジスティクス）
+      </p>
+    </div>
+  </header>
+
+  <!-- 2. Narrative Section -->
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-text">
+        <p>10年前、私は告知を受けました。</p>
+        <p>その日から、私の頭の中は得体の知れない「不確実性」に占拠されました。時間の長さも、ステージの数字も、関係ありません。情報の濁流によって、本来そこにいたはずの「自分」が、追い出されてしまったのです。</p>
+        <p>深夜の検索、尽きない不安。自分の大切な「今日」までもが、がんに乗っ取られてしまった。</p>
+        <p class="heavy-load">足が止まったのは、弱さのせいではありません。<br>一人の人間が背負うには、その荷物が、あまりに重すぎただけなのです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Logistics Section -->
+  <section class="logic-section">
+    <div class="container">
+      <div class="section-title">
+        <h2 style="font-size:32px; margin-bottom:20px;">意志や頑張りではなく、「仕組み」で自分を守る。</h2>
+        <p style="color:var(--color-text-sub);">Azukは、あなたの「今日」を整える3ステップを提供します。</p>
+      </div>
+      <div class="step-grid">
+        <div class="step-card">
+          <span class="step-label">UNLOAD</span>
+          <h3>預ける</h3>
+          <p>不安も記録もすべてAzukへ。一人で抱え込まず、仕組みに委ねて脳のメモリを解放します。</p>
+        </div>
+        <div class="step-card">
+          <span class="step-label">SORT</span>
+          <h3>整う</h3>
+          <p>情報のノイズを遮断し、AIが整理。あなたが納得して次を選べる「静寂」を取り戻します。</p>
+        </div>
+        <div class="step-card">
+          <span class="step-label">FOCUS</span>
+          <h3>動き出す</h3>
+          <p>空いた余白で、大事な人の手を握る。やりたかったことに、再び心を使えるようになります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Functional Section -->
+  <section class="section" style="background: white;">
+    <div class="container">
+      <div class="feature-item">
+        <div class="feature-info">
+          <span class="step-label">STEP 1: UNLOAD</span>
+          <h2 style="font-size:32px; margin-bottom:24px;">脳を「倉庫」にしない</h2>
+          <p class="text-sub">診察の録音、溢れるスクショ、深夜の不安なメモ。形式を問わず、あらゆる情報を一箇所に集約できます。預けることで、あなたの思考は自由になります。</p>
+        </div>
+        <div class="feature-visual"></div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-info">
+          <span class="step-label">STEP 2: SORT</span>
+          <h2 style="font-size:32px; margin-bottom:24px;">AIが静寂を作る</h2>
+          <p class="text-sub">膨大な情報をAIが解析。長い記録を要約し、難解な専門用語を理解しやすく整えます。何度も読み返したり、探し回ったりする脳の負担を削ぎ落とします。</p>
+        </div>
+        <div class="feature-visual"></div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-info">
+          <span class="step-label">STEP 3: FOCUS</span>
+          <h2 style="font-size:32px; margin-bottom:24px;">今日を、自分の手に取り戻す</h2>
+          <p class="text-sub">情報の濁流が止まり、脳に「余白」ができたとき。あなたは本来注力したかったキャリアや、大切にしたかった活動に、再びエネルギーを注げるようになります。</p>
+        </div>
+        <div class="feature-visual"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Philosophy -->
+  <section class="philosophy-section">
+    <div class="container">
+      <h2 style="font-size:36px; margin-bottom:40px; line-height:1.5;">自分の歩幅で歩けるようになるまで、<br>私たちはそばにいる。</h2>
+      <p style="max-width:750px; margin:0 auto; opacity:0.8; font-size:18px;">私たちは「無理に前を向け」とは言いません。告知後の嵐の中にいるあなたに必要なのは、励ましよりも先に、自分を取り巻く「静寂」を確保することだからです。</p>
+      <a href="#" class="cta-button">まずは、最初の一荷（ひとか）を預けてみる</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:100px 0; text-align:center; background: var(--color-background);">
+    <div style="font-size:28px; font-weight:700; margin-bottom:20px; letter-spacing:0.1em;">azuk</div>
+    <div style="font-size:12px; color:var(--color-text-sub);">© 2026 azuk. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const noiseLayer = document.getElementById('noise-layer');
+    const words = ["CT結果", "副作用", "費用", "仕事の調整", "Stage II", "生存率", "民間療法", "主治医の言葉", "家族の顔"];
+    
+    function createNoise() {
+      for(let i=0; i<20; i++) {
+        const item = document.createElement('div');
+        item.className = 'noise-item';
+        item.textContent = words[Math.floor(Math.random()*words.length)];
+        item.style.left = Math.random() * 90 + '%';
+        item.style.top = Math.random() * 90 + '%';
+        item.dataset.y = Math.random() * 100;
+        item.dataset.speed = Math.random() * 0.04 + 0.01;
+        noiseLayer.appendChild(item);
+      }
+    }
+
+    function drift(time) {
+      document.querySelectorAll('.noise-item').forEach(el => {
+        let y = parseFloat(el.dataset.y) + parseFloat(el.dataset.speed);
+        if(y > 110) y = -10;
+        el.dataset.y = y;
+        el.style.transform = `translateY(${y}vh)`;
+      });
+      requestAnimationFrame(drift);
+    }
+
+    createNoise();
+    requestAnimationFrame(drift);
+  </script>
+</body>
+</html>
