@@ -1,9 +1,29 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { NOISE_DATA } from '@/lib/constants'
 import NoiseItem from '@/components/animations/NoiseItem'
 
+interface NoiseItemData {
+  text: string
+  initialY: number
+  driftRate: number
+}
+
 export default function HeroSection() {
+  const [noiseItems, setNoiseItems] = useState<NoiseItemData[]>([])
+
+  // クライアントサイドでのみランダム値を生成（ハイドレーションミスマッチを防ぐ）
+  useEffect(() => {
+    setNoiseItems(
+      NOISE_DATA.map((text) => ({
+        text,
+        initialY: Math.random() * 50,
+        driftRate: Math.random() * 0.1 + 0.05,
+      }))
+    )
+  }, [])
+
   return (
     <section
       id="gravity-area"
@@ -24,12 +44,12 @@ export default function HeroSection() {
 
       {/* 情報ノイズ要素 */}
       <div id="noise-container" className="absolute inset-0">
-        {NOISE_DATA.map((text, index) => (
+        {noiseItems.map((item, index) => (
           <NoiseItem
             key={index}
-            text={text}
-            initialY={Math.random() * 50}
-            driftRate={Math.random() * 0.1 + 0.05}
+            text={item.text}
+            initialY={item.initialY}
+            driftRate={item.driftRate}
           />
         ))}
       </div>

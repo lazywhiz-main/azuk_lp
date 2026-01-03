@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface NoiseItemProps {
   text: string
@@ -11,10 +11,21 @@ interface NoiseItemProps {
 export default function NoiseItem({ text, initialY, driftRate }: NoiseItemProps) {
   const itemRef = useRef<HTMLDivElement>(null)
   const yPositionRef = useRef(initialY)
-  const animationFrameRef = useRef<number>()
-  const lastTimeRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
+  const lastTimeRef = useRef<number | undefined>(undefined)
+  const [position, setPosition] = useState<{ left: string; top: string } | null>(null)
+
+  // クライアントサイドでのみ位置を設定（ハイドレーションミスマッチを防ぐ）
+  useEffect(() => {
+    setPosition({
+      left: `${Math.random() * 80 + 10}%`,
+      top: `${Math.random() * 80 + 10}%`,
+    })
+  }, [])
 
   useEffect(() => {
+    if (!position) return
+
     const animate = (timestamp: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = timestamp
       const deltaTime = timestamp - lastTimeRef.current
@@ -41,16 +52,18 @@ export default function NoiseItem({ text, initialY, driftRate }: NoiseItemProps)
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [driftRate])
+  }, [driftRate, position])
+
+  // サーバーサイドでは位置を設定せず、クライアントサイドで設定されるまで非表示
+  if (!position) {
+    return null
+  }
 
   return (
     <div
       ref={itemRef}
       className="absolute text-xs text-slate-400 opacity-30 select-none pointer-events-none will-change-transform transition-all duration-1000 ease-out"
-      style={{
-        left: `${Math.random() * 80 + 10}%`,
-        top: `${Math.random() * 80 + 10}%`,
-      }}
+      style={position}
     >
       {text}
     </div>
