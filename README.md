@@ -17,6 +17,36 @@ azukアプリのランディングページです。
 npm install
 ```
 
+### 環境変数の設定
+
+お問い合わせフォームのメール送信機能を使用するには、ResendのAPIキーが必要です。
+
+1. **Resendアカウントの作成とAPIキーの取得**
+   - [Resend](https://resend.com) にアクセスしてアカウントを作成
+   - [API Keys](https://resend.com/api-keys) ページからAPIキーを取得
+   - APIキーは `re_` で始まる文字列です
+
+2. **環境変数ファイルの作成**
+   
+   プロジェクトルートに `.env.local` ファイルを作成し、以下の内容を追加してください：
+
+   ```bash
+   # Resend API Key
+   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+
+   # Contact Email (optional)
+   # お問い合わせメールの送信先（デフォルト: contact_azuk@lazywhiz.io）
+   CONTACT_EMAIL=contact_azuk@lazywhiz.io
+   ```
+
+3. **Vercelなどの本番環境での設定**
+   
+   Vercelにデプロイする場合、Vercelのダッシュボードで環境変数を設定してください：
+   - Settings → Environment Variables
+   - `RESEND_API_KEY` と `CONTACT_EMAIL` を追加
+
+**注意**: `.env.local` ファイルは `.gitignore` に含まれているため、Gitにはコミットされません。
+
 ### 開発サーバーの起動
 
 ```bash

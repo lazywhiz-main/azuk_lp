@@ -27,18 +27,34 @@ export default function ContactPage() {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    // ここで実際の送信処理を実装
-    // 例: APIエンドポイントへのPOSTリクエスト
     try {
-      // シミュレーション: 実際の実装ではAPIを呼び出す
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || '送信に失敗しました。')
+      }
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
     } catch (error) {
+      console.error('Contact form error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleReset = () => {
+    setSubmitStatus('idle')
+    setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
   return (
@@ -70,24 +86,56 @@ export default function ContactPage() {
           <h1 className="text-4xl font-bold mb-8">お問い合わせ</h1>
 
           <div className="bg-surface rounded-xl shadow-md p-8">
-            <p className="text-base leading-relaxed mb-8 text-text-sub">
-              azukに関するご質問、ご意見、ご要望がございましたら、以下のフォームよりお気軽にお問い合わせください。
-              お問い合わせへの返信には、数営業日かかる場合がございます。あらかじめご了承ください。
-            </p>
-
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                お問い合わせを受け付けました。ありがとうございます。
+            {submitStatus === 'success' ? (
+              // 送信完了画面
+              <div className="text-center py-12">
+                <div className="mb-6">
+                  <svg
+                    className="w-20 h-20 mx-auto text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h2 className="text-3xl font-bold mb-4 text-primary">送信完了</h2>
+                <p className="text-lg text-text-sub mb-8">
+                  お問い合わせを受け付けました。<br />
+                  ありがとうございます。
+                </p>
+                <p className="text-sm text-text-sub mb-8">
+                  お問い合わせへの返信には、数営業日かかる場合がございます。<br />
+                  あらかじめご了承ください。
+                </p>
+                <Button
+                  onClick={handleReset}
+                  variant="primary"
+                  className="w-full md:w-auto"
+                >
+                  もう一度送信する
+                </Button>
               </div>
-            )}
+            ) : (
+              // フォーム画面
+              <>
+                <p className="text-base leading-relaxed mb-8 text-text-sub">
+                  azukに関するご質問、ご意見、ご要望がございましたら、以下のフォームよりお気軽にお問い合わせください。
+                  お問い合わせへの返信には、数営業日かかる場合がございます。あらかじめご了承ください。
+                </p>
 
-            {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                送信に失敗しました。しばらく時間をおいて再度お試しください。
-              </div>
-            )}
+                {submitStatus === 'error' && (
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                    送信に失敗しました。しばらく時間をおいて再度お試しください。
+                  </div>
+                )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold mb-2">
                   お名前 <span className="text-accent">*</span>
@@ -158,28 +206,30 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div className="pt-4">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="w-full md:w-auto"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? '送信中...' : '送信する'}
-                </Button>
-              </div>
-            </form>
+                  <div className="pt-4">
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      className="w-full md:w-auto"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? '送信中...' : '送信する'}
+                    </Button>
+                  </div>
+                </form>
 
-            <div className="mt-8 pt-8 border-t border-border">
-              <h2 className="text-xl font-semibold mb-4">よくある質問</h2>
-              <p className="text-base leading-relaxed mb-4 text-text-sub">
-                よくある質問については、
-                <Link href="/#faq" className="text-accent hover:underline">
-                  よくある質問ページ
-                </Link>
-                をご確認ください。
-              </p>
-            </div>
+                <div className="mt-8 pt-8 border-t border-border">
+                  <h2 className="text-xl font-semibold mb-4">よくある質問</h2>
+                  <p className="text-base leading-relaxed mb-4 text-text-sub">
+                    よくある質問については、
+                    <Link href="/#faq" className="text-accent hover:underline">
+                      よくある質問ページ
+                    </Link>
+                    をご確認ください。
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Container>
