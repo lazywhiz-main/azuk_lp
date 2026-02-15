@@ -65,14 +65,14 @@ export default function PlanSection() {
                   variant={plan.isPremium ? 'primary' : 'secondary'}
                   className="w-full"
                 >
-                  App Storeで見る
+                  App Storeで見る（準備中）
                 </Button>
                 <Button
                   href="#"
                   variant={plan.isPremium ? 'primary' : 'secondary'}
                   className="w-full"
                 >
-                  Google Playで見る
+                  Google Playで見る（準備中）
                 </Button>
               </div>
             </div>

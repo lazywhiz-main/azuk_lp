@@ -19,8 +19,8 @@ function PersonalStorySection() {
     <section className="py-[100px] md:py-20 bg-surface">
       <Container>
         <div className="max-w-[720px] mx-auto">
-          <div className="text-lg md:text-lg leading-relaxed text-primary space-y-6 md:space-y-10">
-            <p>10年前、私は告知を受けました。</p>
+              <div className="text-lg md:text-lg leading-relaxed text-primary space-y-6 md:space-y-10">
+                <p>10年前、私はがん告知を受けました。</p>
             <p>
               その日から、私の頭の中は得体の知れない「不確実性」に占拠されました。時間の長さも、ステージの数字も、関係ありません。情報の濁流によって、本来そこにいたはずの「自分」が、追い出されてしまったのです。
             </p>
