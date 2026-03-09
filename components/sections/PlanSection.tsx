@@ -61,11 +61,13 @@ export default function PlanSection() {
               </ul>
               <div className="flex flex-col gap-lg">
                 <Button
-                  href="#"
+                  href="https://apps.apple.com/jp/app/azuk/id6755970502"
                   variant={plan.isPremium ? 'primary' : 'secondary'}
                   className="w-full"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  App Storeで見る（準備中）
+                  App Storeで見る
                 </Button>
                 <Button
                   href="#"

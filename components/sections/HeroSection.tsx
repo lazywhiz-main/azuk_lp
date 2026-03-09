@@ -57,13 +57,15 @@ export default function HeroSection() {
       {/* CTAボタン */}
       <div className="flex flex-col md:flex-row gap-4 mt-8 z-10 w-full md:w-auto px-6">
         <a
-          href="#"
+          href="https://apps.apple.com/jp/app/azuk/id6755970502"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 text-base font-semibold text-primary bg-surface border-2 border-surface px-8 py-4 tracking-wide transition-all duration-300 rounded-lg shadow-lg w-full md:min-w-[180px] hover:-translate-y-0.5 hover:shadow-xl hover:bg-white active:translate-y-0 active:scale-95 active:shadow-md"
         >
           <svg className="w-5 h-5 fill-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
           </svg>
-          App Store（準備中）
+          App Store
         </a>
           <a
           href="#"
